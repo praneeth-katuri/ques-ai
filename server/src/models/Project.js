@@ -2,11 +2,16 @@ const mongoose = require("mongoose");
 
 const projectSchema = new mongoose.Schema(
   {
-    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     title: { type: String, required: true },
-    podcasts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Podcast" }],
   },
   { timestamps: true }
 );
+
+projectSchema.index({ title: 1, userId: 1 }, { unique: true });
 
 module.exports = mongoose.model("Project", projectSchema);
