@@ -4,6 +4,7 @@ const config = {
   app: {
     port: process.env.PORT || 5000,
     env: process.env.NODE_ENV,
+    frontendUrl: process.env.FRONTEND_URL,
   },
   db: {
     dbUri: process.env.DB_URI,
