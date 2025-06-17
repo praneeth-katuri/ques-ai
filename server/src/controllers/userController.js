@@ -1,0 +1,62 @@
+const userService = require("../services/authService");
+
+const addProject = async (req, res, next) => {
+  try {
+    const title = req.body.title;
+    const userId = req.userId;
+
+    const project = await userService.addProject(title, userId);
+    res.status(201).json(project);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const getPodcasts = async (req, res, next) => {
+  try {
+    const { projectId } = req.params;
+    const userId = req.userId;
+
+    const podcasts = await userService.getPodcasts(projectId, userId);
+    res.status(200).json(podcasts);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const addPodcast = async (req, res, next) => {
+  try {
+    const { projectId } = req.params;
+    const { title, description } = req.body;
+    const userId = req.userId;
+
+    const podcast = await userService.addPodcast(
+      projectId,
+      title,
+      description,
+      userId
+    );
+    res.status(201).json(podcast);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const deletePodcast = async (req, res, next) => {
+  try {
+    const { projectId, podcastId } = req.params;
+    const userId = req.userId;
+
+    await userService.deletePodcast(projectId, podcastId, userId);
+    res.status(200).json({ message: "Podcast deleted successfully" });
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = {
+  addProject,
+  getPodcasts,
+  addPodcast,
+  deletePodcast,
+};
