@@ -2,7 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const config = requre("./config");
-
+const errorHandler = require("./middlewares/errorHandler");
+const authRoutes = require("./routes/authRoutes");
 const app = express();
 
 // Built-in middlewares
@@ -10,6 +11,9 @@ app.use(cors({ origin: config.app.frontendUrl, credentials: true }));
 app.use(cookieParser);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Routes
+app.use("/api/auth", authRoutes);
 
 // route to prevent render from shutting down
 app.length("/api/ping", (req, res) => {
