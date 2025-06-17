@@ -1,4 +1,4 @@
-const userService = require("../services/authService");
+const userService = require("../services/userService");
 
 const addProject = async (req, res, next) => {
   try {
@@ -7,6 +7,15 @@ const addProject = async (req, res, next) => {
 
     const project = await userService.addProject(title, userId);
     res.status(201).json(project);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const getProjects = async (req, res, next) => {
+  try {
+    const projects = await userService.getProjects(req.userId);
+    res.status(200).json(projects);
   } catch (err) {
     next(err);
   }
@@ -56,6 +65,7 @@ const deletePodcast = async (req, res, next) => {
 
 module.exports = {
   addProject,
+  getProjects,
   getPodcasts,
   addPodcast,
   deletePodcast,

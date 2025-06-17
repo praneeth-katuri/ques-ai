@@ -13,6 +13,10 @@ const addProject = async (title, userId) => {
   return await Project.create({ title, userId });
 };
 
+const getProjects = async (userId) => {
+  return await Project.find({ userId });
+};
+
 const getPodcasts = async (projectId, userId) => {
   const projectExists = await Project.findOne({ _id: projectId, userId });
 
@@ -64,6 +68,7 @@ const deletePodcast = async (projectId, podcastId, userId) => {
 
 module.exports = {
   addProject,
+  getProjects,
   getPodcasts,
   addPodcast,
   deletePodcast,
