@@ -11,7 +11,6 @@ const userSchema = new mongoose.Schema(
       minlength: [8, "Password must be atleast 8 characters"],
       select: false,
     },
-    projects: [{ type: mongoose.Schema.Types.ObjectId, ref: "Project" }],
   },
   {
     timestamps: true,
