@@ -1,5 +1,5 @@
 import { Toaster } from "react-hot-toast";
-import AppRoutes from "./routes/AppRoutes";
+import AppRoutes from "./routes";
 
 const App = () => (
   <>

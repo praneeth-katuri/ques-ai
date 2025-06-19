@@ -1,5 +1,5 @@
 import styles from "@/styles/LoginPage.module.css";
-import Loginwave from "../assets/images/12.avif";
+import Loginwave from "../assets/images/loginWave.avif";
 import SmallLogo from "../assets/icons/logo_small.png";
 import QuesLogo from "../assets/icons/QuesLogo.avif";
 import Input from "../components/ui/Input";

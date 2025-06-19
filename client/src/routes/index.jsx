@@ -10,7 +10,7 @@ import LoginPage from "../pages/LoginPage";
 const AppRoutes = () => (
   <Routes>
     <Route path="/login" element={<LoginPage />} />
-    <Route path="/register" element={<RegisterPage />} />
+    <Route path="/register" element={<LoginPage />} />
 
     <Route
       path="/"
