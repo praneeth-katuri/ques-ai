@@ -1,6 +1,6 @@
 import api from "@/services/api";
-import { useAuthStore } from "@/store/useAuthStore";
-import { setupInterceptors } from "@/services/api/apiInterceptor";
+import { useAuthStore } from "@/stores/authStore";
+import { setupInterceptors } from "@/services/api/axiosInterceptor";
 
 export const login = async (email, password) => {
   const res = await api.post("/auth/login", { email, password });
