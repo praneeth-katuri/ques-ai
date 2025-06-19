@@ -3,7 +3,7 @@ const User = require("../models/User");
 const config = require("../config");
 
 const login = async ({ email, password }) => {
-  const userExists = await User.findOne({ email: email }).select("+password");
+  const userExists = await User.findOne({ email }).select("+password");
 
   if (!userExists) {
     const error = new Error("User not found");
@@ -11,7 +11,7 @@ const login = async ({ email, password }) => {
     throw error;
   }
 
-  const passwordMatch = await User.comparePassword(password);
+  const passwordMatch = await userExists.comparePassword(password);
 
   if (!passwordMatch) {
     const error = new Error("Invalid password");
@@ -25,7 +25,7 @@ const login = async ({ email, password }) => {
   return { user: userExists, accessToken, refreshToken };
 };
 
-const register = async ({ username, email, password, confirmPassword }) => {
+const register = async ({ name, email, password, confirmPassword }) => {
   const userExists = await User.findOne({ email: email });
 
   if (userExists) {
@@ -34,9 +34,13 @@ const register = async ({ username, email, password, confirmPassword }) => {
     throw error;
   }
 
-  // validation for confirming password pending
+  if (password !== confirmPassword) {
+    const error = new Error("passwords don't match");
+    error.status = 400;
+    throw error;
+  }
 
-  const user = await User.create({ name: username, email, password });
+  const user = await User.create({ name, email, password });
 };
 
 const refresh = async (refreshToken) => {
@@ -60,7 +64,7 @@ const refresh = async (refreshToken) => {
   }
 
   const accessToken = tokenUtils.generateAccessToken(userExists._id);
-  return { accessToken, user };
+  return { accessToken, user: userExists };
 };
 
 module.exports = {
