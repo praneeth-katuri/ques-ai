@@ -1,7 +1,7 @@
-import styles from "@/styles/AuthLayout.module.css";
-import Loginwave from "../assets/images/loginWave.avif";
-import SmallLogo from "../assets/icons/logo_small.png";
-import QuesLogo from "../assets/icons/QuesLogo.avif";
+import styles from "@/styles/layout/AuthLayout.module.css";
+import Loginwave from "@/assets/images/loginWave.avif";
+import SmallLogo from "@/assets/icons/logo_small.png";
+import QuesLogo from "@/assets/icons/QuesLogo.avif";
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuthStore } from "@/stores/authStore";
 

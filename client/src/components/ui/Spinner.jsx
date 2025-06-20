@@ -1,5 +1,4 @@
-// components/FullPageLoader.jsx
-import styles from "@/styles/Spinner.module.css"; // or use module CSS
+import styles from "@/styles/ui/Spinner.module.css";
 
 const Spinner = () => {
   return (
