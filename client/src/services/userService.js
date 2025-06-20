@@ -21,6 +21,7 @@ export const getPodcasts = async (projectId) => {
 export const addPodcast = async (podcast, projectId) => {
   const res = await api.post(`/user/${projectId}/podcasts`, podcast);
   useProjectStore.getState().addToCurrentPodcasts(res.data?.podcast);
+  useProjectStore.getState().updatePodcastCount(projectId, 1);
 };
 
 export const updatePodcast = async (podcastId, projectId, data) => {
@@ -31,6 +32,7 @@ export const updatePodcast = async (podcastId, projectId, data) => {
 export const deletePodcast = async (projectId, podcastId) => {
   await api.delete(`/user/${projectId}/podcasts/${podcastId}`);
   useProjectStore.getState().deletePodcast(podcastId);
+  useProjectStore.getState().updatePodcastCount(projectId, -1);
 };
 
 export const updateProfile = async (data) => {
