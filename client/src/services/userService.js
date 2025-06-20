@@ -22,17 +22,20 @@ export const addPodcast = async (podcast, projectId) => {
   const res = await api.post(`/user/${projectId}/podcasts`, podcast);
   useProjectStore.getState().addToCurrentPodcasts(res.data?.podcast);
   useProjectStore.getState().updatePodcastCount(projectId, 1);
+  useProjectStore.getState().updateProjectTimestamp(projectId);
 };
 
 export const updatePodcast = async (podcastId, projectId, data) => {
   const res = await api.patch(`/user/${projectId}/podcasts/${podcastId}`, data);
   useProjectStore.getState().updatePodcastInStore(podcastId, res.data);
+  useProjectStore.getState().updateProjectTimestamp(projectId);
 };
 
 export const deletePodcast = async (projectId, podcastId) => {
   await api.delete(`/user/${projectId}/podcasts/${podcastId}`);
   useProjectStore.getState().deletePodcast(podcastId);
   useProjectStore.getState().updatePodcastCount(projectId, -1);
+  useProjectStore.getState().updateProjectTimestamp(projectId);
 };
 
 export const updateProfile = async (data) => {
