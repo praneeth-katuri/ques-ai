@@ -1,7 +1,6 @@
 const tokenUtils = require("../utils/generateToken");
 const User = require("../models/User");
 const Project = require("../models/Project");
-const Podcast = require("../models/Podcast");
 const config = require("../config");
 
 const login = async ({ email, password }) => {
@@ -21,30 +20,7 @@ const login = async ({ email, password }) => {
     throw error;
   }
 
-  const projectsWithPodcastCount = await Project.aggregate([
-    { $match: { userId: userExists._id } },
-    {
-      $lookup: {
-        from: "podcasts",
-        localField: "_id",
-        foreignField: "projectId",
-        as: "podcasts",
-      },
-    },
-    {
-      $addFields: {
-        podcastCount: { $size: "$podcasts" },
-      },
-    },
-    {
-      $project: {
-        title: 1,
-        updatedAt: 1,
-        createdAt: 1,
-        podcastCount: 1,
-      },
-    },
-  ]);
+  const projects = await Project.find({ userId: userExists._id });
 
   const accessToken = tokenUtils.generateAccessToken(userExists._id);
   const refreshToken = tokenUtils.generateRefreshToken(userExists._id);
@@ -53,7 +29,7 @@ const login = async ({ email, password }) => {
     user: userExists,
     accessToken,
     refreshToken,
-    projects: projectsWithPodcastCount,
+    projects,
   };
 };
 
@@ -95,33 +71,10 @@ const refresh = async (refreshToken) => {
     throw error;
   }
 
-  const projectsWithPodcastCount = await Project.aggregate([
-    { $match: { userId: userExists._id } },
-    {
-      $lookup: {
-        from: "podcasts",
-        localField: "_id",
-        foreignField: "projectId",
-        as: "podcasts",
-      },
-    },
-    {
-      $addFields: {
-        podcastCount: { $size: "$podcasts" },
-      },
-    },
-    {
-      $project: {
-        title: 1,
-        updatedAt: 1,
-        createdAt: 1,
-        podcastCount: 1,
-      },
-    },
-  ]);
+  const projects = await Project.find({ userId: userExists._id });
 
   const accessToken = tokenUtils.generateAccessToken(userExists._id);
-  return { accessToken, user: userExists, projects: projectsWithPodcastCount };
+  return { accessToken, user: userExists, projects };
 };
 
 module.exports = {

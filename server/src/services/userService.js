@@ -41,8 +41,15 @@ const addPodcast = async (projectId, title, description, userId) => {
   }
   const [podcast] = await Promise.all([
     Podcast.create({ projectId, title, description }),
-    Project.updateOne({ _id: projectId }, { updatedAt: new Date() }),
+    Project.updateOne(
+      { _id: projectId },
+      {
+        $inc: { podcastCount: 1 },
+        $set: { updatedAt: new Date() },
+      }
+    ),
   ]);
+
   return podcast;
 };
 
@@ -88,10 +95,15 @@ const deletePodcast = async (projectId, podcastId, userId) => {
     error.status = 404;
     throw error;
   }
-
   await Promise.all([
     podcast.deleteOne(),
-    Project.updateOne({ _id: projectId }, { updatedAt: new Date() }),
+    Project.updateOne(
+      { _id: projectId },
+      {
+        $inc: { podcastCount: -1 },
+        $set: { updatedAt: new Date() },
+      }
+    ),
   ]);
 };
 
