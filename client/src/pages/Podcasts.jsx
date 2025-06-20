@@ -1,5 +1,13 @@
-import Sidebar from "../components/Sidebar";
+import AddPodcastOptions from "@/components/podcasts/AddPodcastOptions";
+import PodcastTable from "@/components/podcasts/PodcastTable";
 
-const Podcasts = () => <Sidebar />;
+const Podcasts = () => {
+  return (
+    <>
+      <AddPodcastOptions />
+      <PodcastTable />
+    </>
+  );
+};
 
 export default Podcasts;
