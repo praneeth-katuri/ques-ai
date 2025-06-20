@@ -10,6 +10,6 @@ const styles = {
 };
 
 export default function ErrorElement({ children }) {
-  if (!children) return null; // no empty box
+  if (!children) return null;
   return <p style={styles}>{children}</p>;
 }

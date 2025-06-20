@@ -29,14 +29,15 @@ const registerSchema = z
       .trim()
       .min(8, "Password must be at least 8 characters"),
 
-    verifyPassword: z
+    confirmPassword: z
       .string({
         required_error: "Please confirm your password",
       })
-      .trim(),
+      .trim()
+      .min(1, "Please confirm your password"),
   })
-  .refine((data) => data.password === data.verifyPassword, {
-    path: ["verifyPassword"],
+  .refine((data) => data.password === data.confirmPassword, {
+    path: ["confirmPassword"],
     message: "Passwords do not match",
   });
 
