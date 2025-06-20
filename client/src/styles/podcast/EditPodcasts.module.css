@@ -1,0 +1,93 @@
+.container {
+  padding: 2rem;
+  background-color: #f9fafb;
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.titleGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.backIcon {
+  width: 22px;
+  height: 22px;
+  color: #111827;
+  cursor: pointer;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.editButton,
+.saveButton,
+.cancelButton {
+  padding: 6px 16px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.editButton {
+  background-color: #111827;
+  color: #fff;
+}
+
+.saveButton {
+  background-color: #10b981;
+  color: white;
+  margin-left: 0.5rem;
+}
+
+.cancelButton {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+.editActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.speaker {
+  color: #7c3aed;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.text {
+  color: #374151;
+  line-height: 1.6;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 160px;
+  padding: 1rem;
+  font-size: 1rem;
+  font-family: inherit;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  resize: vertical;
+}

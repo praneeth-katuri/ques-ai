@@ -1,0 +1,61 @@
+.field {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.field input {
+  width: 100%;
+  padding: 1rem 0.75rem;
+  font-size: 1rem;
+  border: 2px solid grey;
+  border-radius: 0.5rem;
+  background: #f5f6fa;
+  color: black;
+  outline: none;
+}
+
+.field input:focus {
+  border: 2px solid #7e22ce;
+}
+
+.field input:not(:placeholder-shown) {
+  border: 3px solid #7e22ce;
+}
+
+.field label {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: grey;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  background-color: #f5f6fa;
+  padding: 0 0.25rem;
+}
+
+.field input:focus + label,
+.field input:not(:placeholder-shown) + label {
+  top: 0;
+  transform: translateY(-50%) scale(0.85);
+  color: slateblue;
+  /* transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1); */
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 0.75rem 2rem;
+  background-color: #7e22ce;
+  color: white;
+  font-weight: bolder;
+  border: none;
+  border-radius: 4px;
+  margin-bottom: 1.25rem;
+  cursor: pointer;
+}
+
+.inputErrorMargin {
+  margin-bottom: 0.25rem;
+}
