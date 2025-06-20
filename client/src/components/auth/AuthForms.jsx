@@ -43,7 +43,7 @@ export const LoginForm = () => {
       </form>
 
       <p>
-        Don&apos;t have an account? <Link to="/register">Create Account</Link>
+        Don&apos;t have an account? <Link to="/">Create Account</Link>
       </p>
     </>
   );
