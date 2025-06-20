@@ -1,0 +1,85 @@
+.container {
+  margin-top: 2.5rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #111827;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  color: #374151;
+}
+
+th,
+td {
+  padding: 0.75rem;
+  font-weight: 500;
+  text-align: center;
+  color: #646464;
+  border-top: 1px solid #e5e7eb;
+}
+
+th {
+  background: #f3f4f6;
+  text-align: center;
+  font-weight: 500;
+  color: #374151;
+}
+
+td:first-child {
+  width: 50px;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.viewBtn {
+  background-color: #f9fafb;
+  border: 1px solid #d1d5db;
+  color: #111827;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.deleteBtn {
+  background-color: #fee2e2;
+  border: none;
+  color: #b91c1c;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.empty {
+  text-align: center;
+  color: #9ca3af;
+  padding: 1.5rem;
+}
+
+.narrow {
+  width: 250px;
+  white-space: nowrap;
+  text-align: center;
+}
