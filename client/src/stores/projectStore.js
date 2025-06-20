@@ -1,15 +1,26 @@
 import { create } from "zustand";
 
-export const useProjectStore = create((set) => ({
+export const useProjectStore = create((set, get) => ({
   projects: [],
   selectedProject: null,
   currentPodcasts: [],
 
+  getProjectNameById: (id) =>
+    get().projects.find((project) => project._id === id)?.title ||
+    "Unnamed Project",
+
   setProjects: (value) => set({ projects: value }),
   addProject: (value) =>
     set((state) => ({ projects: [...state.projects, value] })),
-  setSelectedProject: (project) => set({ selectedProject: project }),
-  setCurrentPodcasts: (podcasts) => set({ currentPodcasts: podcasts }),
+  updatePodcastInStore: (podcastId, updatedData) =>
+    set((state) => ({
+      currentPodcasts: state.currentPodcasts.map((p) =>
+        p._id === podcastId ? { ...p, ...updatedData } : p
+      ),
+    })),
+  setSelectedProject: (project) =>
+    set({ selectedProject: project, currentPodcasts: [] }),
+  setCurrentPodcasts: (podcasts) => set({ currentPodcasts: [...podcasts] }),
   addToCurrentPodcasts: (podcast) =>
     set((state) => ({
       currentPodcasts: [podcast, ...state.currentPodcasts],
