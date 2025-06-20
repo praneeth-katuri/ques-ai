@@ -1,0 +1,57 @@
+/* Projects.module.css */
+
+.container {
+  padding: 2rem;
+  /* position: relative; */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #7e22ce;
+}
+
+.createButton {
+  background-color: #1e1732;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 600;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.createButton:hover {
+  background-color: #2a1c47;
+}
+
+.projectsGrid {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.icons {
+  /* position: absolute;
+  top: 1.5rem;
+  right: 2rem; */
+  display: flex;
+  gap: 1.5rem;
+}
+
+.projects {
+  padding-top: 2rem;
+  padding-inline: 2.5rem;
+}
