@@ -14,6 +14,15 @@ export const useProjectStore = create((set, get) => ({
       ),
     })),
 
+  updateProjectTimestamp: (projectId) =>
+    set((state) => ({
+      projects: state.projects.map((project) =>
+        project._id === projectId
+          ? { ...project, updatedAt: new Date().toISOString() }
+          : project
+      ),
+    })),
+
   getProjectNameById: (id) =>
     get().projects.find((project) => project._id === id)?.title ||
     "Unnamed Project",
