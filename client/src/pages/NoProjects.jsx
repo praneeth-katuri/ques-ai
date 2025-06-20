@@ -4,10 +4,13 @@ import illustration from "@/assets/images/no_projects.webp";
 import CreateProjectModal from "@/components/projects/CreateProjectModal";
 import ProjectHeader from "../components/ui/ProjectHeader";
 import useModal from "@/hooks/useModal";
+import Spinner from "@/components/ui/Spinner";
 
 const NoProjects = () => {
-  const { isModalOpen, setIsModalOpen, handleProjectCreated } = useModal();
+  const { isModalOpen, setIsModalOpen, loading, handleProjectCreated } =
+    useModal();
 
+  if (loading) return <Spinner />;
   return (
     <div className={styles.wrapper}>
       <ProjectHeader />

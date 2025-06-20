@@ -8,6 +8,10 @@ const projectSchema = new mongoose.Schema(
       required: true,
     },
     title: { type: String, required: true },
+    podcastCount: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );
