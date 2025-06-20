@@ -74,9 +74,6 @@ const updatePodcast = async (userId, projectId, podcastId, updateData) => {
 };
 
 const deletePodcast = async (projectId, podcastId, userId) => {
-  console.log("prjectID", projectId);
-  console.log("podcastId", podcastId);
-  console.log("userId", userId);
   const projectExists = await Project.findOne({ _id: projectId, userId });
 
   if (!projectExists) {
