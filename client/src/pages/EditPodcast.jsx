@@ -1,6 +1,7 @@
 import { ArrowLeft } from "lucide-react";
 import styles from "@/styles/podcast/EditPodcasts.module.css";
 import { useEditPodcast } from "@/hooks/useEditPodcast";
+import Spinner from "@/components/ui/Spinner";
 
 const EditPodcasts = () => {
   const {
@@ -9,10 +10,13 @@ const EditPodcasts = () => {
     isEditing,
     handleEdit,
     handleCancel,
+    loading,
     handleSave,
     setText,
     goBack,
   } = useEditPodcast();
+
+  if (loading) return <Spinner />;
 
   if (!podcast) {
     return <div className={styles.container}>Podcast not found.</div>;

@@ -5,20 +5,13 @@
   padding: 0;
   box-sizing: border-box;
 }
-@font-face {
-  font-family: "CircularStd";
-  src: url("/fonts/CircularStd-Book.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
 
 @font-face {
   font-display: swap;
   font-family: "Roboto";
   font-style: normal;
   font-weight: 300;
-  src: url("../fonts/roboto-v48-latin-300.woff2") format("woff2");
+  src: url("/fonts/roboto-v48-latin-300.woff2") format("woff2");
 }
 
 @font-face {
@@ -58,7 +51,7 @@
   font-family: "Poppins";
   font-style: normal;
   font-weight: 400;
-  src: url("../fonts/poppins-v23-latin-regular.woff2") format("woff2");
+  src: url("/fonts/poppins-v23-latin-regular.woff2") format("woff2");
 }
 
 @font-face {
@@ -66,7 +59,7 @@
   font-family: "Poppins";
   font-style: normal;
   font-weight: 300;
-  src: url("../fonts/poppins-v23-latin-300.woff2") format("woff2");
+  src: url("/fonts/poppins-v23-latin-300.woff2") format("woff2");
 }
 
 h1,
