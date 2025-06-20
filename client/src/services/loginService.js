@@ -1,19 +1,23 @@
 import api from "@/services/api";
 import { useAuthStore } from "@/stores/authStore";
 import { setupInterceptors } from "@/services/api/axiosInterceptor";
+import { useProjectStore } from "@/stores/projectStore";
 
 export const login = async (email, password) => {
   const res = await api.post("/auth/login", { email, password });
-  const accessToken = res.data.accessToken;
-  const user = res.data.user;
+  const { user, accessToken, projects } = res.data;
 
   api.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
   localStorage.setItem("hasSession", "true");
 
   const { setAccessToken, setUser, setIsAuthenticated } =
     useAuthStore.getState();
+
+  const { setProjects } = useProjectStore.getState();
+
   setAccessToken(accessToken);
   setUser(user);
+  setProjects(projects);
   setIsAuthenticated(true);
 };
 
@@ -48,14 +52,17 @@ export const refresh = async () => {
   const { setAccessToken, setUser, setIsAuthenticated, setIsLoading } =
     useAuthStore.getState();
 
+  const { setProjects } = useProjectStore.getState();
+
   try {
     const res = await api.get("/auth/refresh");
-    const accessToken = res.data.accessToken;
-    const user = res.data.user;
+
+    const { user, accessToken, projects } = res.data;
 
     api.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
     setAccessToken(accessToken);
     setUser(user);
+    setProjects(projects);
     setIsAuthenticated(true);
   } catch (err) {
     console.warn("Refresh failed:", err.message);
