@@ -1,5 +1,7 @@
 const tokenUtils = require("../utils/generateToken");
 const User = require("../models/User");
+const Project = require("../models/Project");
+const Podcast = require("../models/Podcast");
 const config = require("../config");
 
 const login = async ({ email, password }) => {
@@ -19,14 +21,44 @@ const login = async ({ email, password }) => {
     throw error;
   }
 
+  const projectsWithPodcastCount = await Project.aggregate([
+    { $match: { userId: userExists._id } },
+    {
+      $lookup: {
+        from: "podcasts",
+        localField: "_id",
+        foreignField: "projectId",
+        as: "podcasts",
+      },
+    },
+    {
+      $addFields: {
+        podcastCount: { $size: "$podcasts" },
+      },
+    },
+    {
+      $project: {
+        title: 1,
+        updatedAt: 1,
+        createdAt: 1,
+        podcastCount: 1,
+      },
+    },
+  ]);
+
   const accessToken = tokenUtils.generateAccessToken(userExists._id);
   const refreshToken = tokenUtils.generateRefreshToken(userExists._id);
 
-  return { user: userExists, accessToken, refreshToken };
+  return {
+    user: userExists,
+    accessToken,
+    refreshToken,
+    projects: projectsWithPodcastCount,
+  };
 };
 
 const register = async ({ name, email, password, confirmPassword }) => {
-  const userExists = await User.findOne({ email: email });
+  const userExists = await User.findOne({ email });
 
   if (userExists) {
     const error = new Error("Email already registered");
@@ -63,8 +95,33 @@ const refresh = async (refreshToken) => {
     throw error;
   }
 
+  const projectsWithPodcastCount = await Project.aggregate([
+    { $match: { userId: userExists._id } },
+    {
+      $lookup: {
+        from: "podcasts",
+        localField: "_id",
+        foreignField: "projectId",
+        as: "podcasts",
+      },
+    },
+    {
+      $addFields: {
+        podcastCount: { $size: "$podcasts" },
+      },
+    },
+    {
+      $project: {
+        title: 1,
+        updatedAt: 1,
+        createdAt: 1,
+        podcastCount: 1,
+      },
+    },
+  ]);
+
   const accessToken = tokenUtils.generateAccessToken(userExists._id);
-  return { accessToken, user: userExists };
+  return { accessToken, user: userExists, projects: projectsWithPodcastCount };
 };
 
 module.exports = {

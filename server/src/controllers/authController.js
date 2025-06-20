@@ -3,16 +3,15 @@ const config = require("../config");
 
 const login = async (req, res, next) => {
   try {
-    const { user, accessToken, refreshToken } = await authService.login(
-      req.body
-    );
+    const { user, accessToken, refreshToken, projects } =
+      await authService.login(req.body);
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
       secure: config.app.env === "production",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
-    res.status(200).json({ user, accessToken });
+    res.status(200).json({ user, accessToken, projects });
   } catch (err) {
     next(err);
   }
@@ -39,7 +38,7 @@ const logout = async (req, res, next) => {
 
     res.clearCookie("refreshToken", {
       httpOnly: true,
-      secure: config.app.env === production,
+      secure: config.app.env === "production",
     });
 
     res.status(200).json({ message: "Logged out successfully" });
@@ -51,8 +50,10 @@ const logout = async (req, res, next) => {
 const refresh = async (req, res, next) => {
   try {
     const refreshToken = req.cookies.refreshToken;
-    const { accessToken, user } = await authService.refresh(refreshToken);
-    res.status(200).json({ accessToken, user });
+    const { accessToken, user, projects } = await authService.refresh(
+      refreshToken
+    );
+    res.status(200).json({ accessToken, user, projects });
   } catch (err) {
     next(err);
   }

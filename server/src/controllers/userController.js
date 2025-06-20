@@ -27,7 +27,7 @@ const getPodcasts = async (req, res, next) => {
     const userId = req.userId;
 
     const podcasts = await userService.getPodcasts(projectId, userId);
-    res.status(200).json(podcasts);
+    res.status(200).json({ podcasts });
   } catch (err) {
     next(err);
   }
@@ -45,7 +45,25 @@ const addPodcast = async (req, res, next) => {
       description,
       userId
     );
-    res.status(201).json(podcast);
+    res.status(201).json({ podcast });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const updatePodcast = async (req, res, next) => {
+  try {
+    const { projectId, podcastId } = req.params;
+    const userId = req.userId;
+    const updateData = req.body;
+
+    const updatedPodcast = await userService.updatePodcast(
+      userId,
+      projectId,
+      podcastId,
+      updateData
+    );
+    res.status(200).json(updatedPodcast);
   } catch (err) {
     next(err);
   }
@@ -63,10 +81,23 @@ const deletePodcast = async (req, res, next) => {
   }
 };
 
+const updateProfile = async (req, res, next) => {
+  try {
+    const userId = req.userId;
+    const { name } = req.body;
+    const user = await userService.updateProfile(userId, name);
+    res.status(200).json(user);
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   addProject,
   getProjects,
   getPodcasts,
   addPodcast,
+  updatePodcast,
   deletePodcast,
+  updateProfile,
 };
