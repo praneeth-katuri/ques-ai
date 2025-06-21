@@ -1,5 +1,5 @@
 ### Frontend
-- **React.js** – UI library
+- **React.js**
 - **Form Handling/Validations** - RHF + zod
 - **Zustand** – Global state management
 - **React Router** – routing
